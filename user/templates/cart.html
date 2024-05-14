@@ -1,0 +1,179 @@
+{% extends 'header.html'%}
+{% block content %}
+<style>
+    .page-title-section {
+        background-image: url('../../media/images/christmas-gift-boxes-light-table.jpg');
+        background-size: cover;
+    }
+
+    /* Media query for smaller screen sizes */
+    @media (max-width: 767px) {
+        .page-title-section {
+            background-image: url('../../media/images/christmas-gifts-wrapped-glittering-paper-beside-festive-poinsettias-set-holiday-s_GXkKiHp.jpg');
+            /* Replace 'your-phone-image.jpg' with the path to your phone image */
+        }
+    }
+</style>
+<div class="offcanvas-overlay"></div>
+
+<!-- Page Title/Header Start -->
+<div class="page-title-section section">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <div class="page-title">
+                    <h1 class="title">Cart</h1>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="">Home</a></li>
+                        <li class="breadcrumb-item active">Cart</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section section-padding">
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <table class="cart-wishlist-table table">
+                <thead>
+                    <tr>
+                        <th class="name" colspan="2">Product</th>
+                        <th class="price">Price</th>
+                        <th class="quantity">Quantity</th>
+                        <th class="subtotal1">Total</th>
+                        <th class="remove">Delete&nbsp;</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for variable in all_products %}
+                    {% if variable.productemail == request.session.email %}
+                    <tr>
+                        <td class="thumbnail"><a href="../../../media/{{variable.productimage}}"><img
+                                    src="../../../media/{{variable.productimage}}" alt="cart-product-1"></a></td>
+                        <td class="name">
+                            <a href="product-details.html">{{ variable.productname }}</a>
+                            <input type="hidden" name="product_name" value="{{ variable.productname }}">
+                            <!-- Hidden field for product name -->
+                        </td>
+                        <td class="price">
+                            <span>{{ variable.productprice }}</span>
+                            <input type="hidden" name="product_price" value="{{ variable.productprice }}">
+                            <!-- Hidden field for product price -->
+                        </td>
+                        <td class="quantity">
+                            <div class="product-quantity">
+                                <span class="qty-btn minus"><i class="ti-minus"></i></span>
+                                <input type="number" class="input-qty" name="quantity" value="1">
+                                <span class="qty-btn plus"><i class="ti-plus"></i></span>
+                            </div>
+                        </td>
+                        <td class="subtotal">
+                            <span class="subtotal-value">₹{{ variable.productprice }}</span>
+                            <input type="hidden" name="subtotal" class="subtotal-input">
+                        </td>
+
+                        <input type="hidden" name="email" value="{{request.session.email}}">
+                        <td class="remove"><a href="/user/deleterow10/{{ variable.id }}/" class="btn">×</a></td>
+                    </tr>
+
+                    {% endif %}
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+
+            <div class="cart-totals mt-5">
+                <h2 class="title">Cart totals</h2>
+                <table>
+                    <tbody>
+                        <tr class="totalfull">
+                            <th>Total</th>
+                            <td><strong><span class="amount">₹0.00</span></strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="product-buttons">
+                    <input type="submit" value="Proceed to checkout" class="btn btn-dark btn-outline-hover-dark">
+                </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('load', function () {
+        var inputQtys = document.querySelectorAll('.input-qty');
+        var subtotals = document.querySelectorAll('.subtotal-input');
+        var productPrices = document.querySelectorAll('.price span');
+
+        function updateTotalAndSubtotal(index) {
+            var inputQty = inputQtys[index];
+            var quantity = parseInt(inputQty.value);
+            var productPrice = parseFloat(productPrices[index].innerText);
+            var subtotal = productPrice * quantity;
+            subtotals[index].value = subtotal.toFixed(2); // Update the subtotal input field
+            subtotals[index].parentElement.querySelector('.subtotal-value').innerText = '₹' + subtotal.toFixed(2); // Update the subtotal display
+            updateTotals();
+        }
+
+        inputQtys.forEach(function (inputQty, index) {
+            inputQty.addEventListener('input', function () {
+                updateTotalAndSubtotal(index);
+            });
+        });
+
+        document.querySelectorAll('.qty-btn.plus').forEach(function (plusBtn, index) {
+            plusBtn.addEventListener('click', function () {
+                var inputQty = inputQtys[index];
+                inputQty.value = parseInt(inputQty.value); // Increment quantity
+                updateTotalAndSubtotal(index);
+            });
+        });
+
+        document.querySelectorAll('.qty-btn.minus').forEach(function (minusBtn, index) {
+    minusBtn.addEventListener('click', function () {
+        var inputQty = inputQtys[index];
+        inputQty.value = Math.max(1, inputQty.value); // Decrement quantity by 1, but ensure it doesn't go below 1
+        updateTotalAndSubtotal(index);
+    });
+});
+
+
+        function updateTotals() {
+            var total = 0;
+            subtotals.forEach(function (subtotalElement) {
+                total += parseFloat(subtotalElement.value);
+            });
+            document.querySelector('.totalfull .amount').innerText = total.toFixed(2);
+        }
+
+        // Initial calculation
+        inputQtys.forEach(function (inputQty, index) {
+            updateTotalAndSubtotal(index);
+        });
+
+        updateTotals();
+    });
+
+</script>
+
+
+
+</div>
+<script>
+    // Clear URL parameters after page load
+    window.onload = function () {
+        var currentUrl = window.location.href;
+        var cleanUrl = currentUrl.split('?')[0]; // Remove query parameters
+        window.history.replaceState({}, document.title, cleanUrl);
+    };
+</script>
+{% endblock %}

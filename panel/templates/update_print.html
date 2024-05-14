@@ -1,0 +1,161 @@
+{% extends 'header1.html'%}
+{% block content %}
+
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Add Prints</h1>
+    <!-- <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Forms</li>
+        <li class="breadcrumb-item active">Elements</li>
+      </ol>
+    </nav> -->
+  </div>
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Printing</h5>
+
+            <!-- General Form Elements -->
+            <form method="POST" action="" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="name" name="name" class="form-control" value="{{main.name}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label">Price</label>
+                <div class="col-sm-10">
+                  <input type="name" name="price" class="form-control" value="{{main.price}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                  <input type="name" name="description" class="form-control" value="{{main.description}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Image</label>
+                <div class="col-sm-10">
+                  <input class="form-control" name="img" type="file" id="formFile" value="{{main.img}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label">Sale Price</label>
+                <div class="col-sm-10">
+                  <input type="name" name="sale" class="form-control" value="{{main.sale}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label">Sku</label>
+                <div class="col-sm-10">
+                  <input type="name" name="sku" class="form-control" value="{{main.sku}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="cars" class="col-sm-2 col-form-label">Category: </label>
+                <div class="col-sm-10">
+                    <select id="category" name="category" class="form-control">
+                        <option value="">Category</option>
+                        <option value="New Arrivals" {% if main.category == 'New Arrivals' %} selected {% endif %}>New Arrivals</option>
+                        <option value="Sale Items" {% if main.category == 'Sale Items' %} selected {% endif %}>Sale Items</option>
+                        <option value="Best Sellers" {% if main.category == 'Best Sellers' %} selected {% endif %}>Best Sellers</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="cars" class="col-sm-2 col-form-label">Sub Category: </label>
+                <div class="col-sm-10">
+                    <select name="sub_category" class="form-control">
+                        <option value="Gift Ideas" {% if main.sub_category == 'Gift Ideas' %} selected {% endif %}>Gift Ideas</option>
+                        <option value="Home Decor" {% if main.sub_category == 'Home Decor' %} selected {% endif %}>Home Decor</option>
+                        <option value="Toys" {% if main.sub_category == 'Toys' %} selected {% endif %}>Toys</option>
+                        <option value="Rasin Art" {% if main.sub_category == 'Rasin Art' %} selected {% endif %}>Rasin Art</option>
+                        <option value="Marriage Items" {% if main.sub_category == 'Marriage Items' %} selected {% endif %}>Marriage Items</option>
+                    </select>
+                </div>
+            </div>
+            
+
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label">Tags</label>
+                <div class="col-sm-10">
+                  <input type="name" name="tags" class="form-control" value="{{main.tags}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Image2</label>
+                <div class="col-sm-10">
+                  <input class="form-control" name="img2" type="file" id="formFile" value="{{main.img2}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Image3</label>
+                <div class="col-sm-10">
+                  <input class="form-control" name="img3" type="file" id="formFile" value="{{main.img3}}"> 
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Image4</label>
+                <div class="col-sm-10">
+                  <input class="form-control" name="img4" type="file" id="formFile" value="{{main.img4}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label">Rate</label>
+                <div class="col-sm-10">
+                  <input type="name" name="rate" class="form-control" value="{{main.rate}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label">Discount</label>
+                <div class="col-sm-10">
+                  <input type="name" name="discount" class="form-control" value="{{main.discount}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="cars" class="col-sm-2 col-form-label">Type </label>
+                <div class="col-sm-10">
+                  <select id="category" name="type" class="form-control">
+                    <option value="">Type</option>
+                    <option value="Printing" {% if main.type == 'Printing' %} selected {% endif %}>Printing</option>
+                    <option value="Gifting" {% if main.type == 'Gifting' %} selected {% endif %}>Gifting</option>
+                    
+                </select>
+                
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-sm-10">
+                  <button type="submit" name="submit" class="btn btn-primary">Submit Form</button>
+                </div>
+              </div>
+            </form><!-- End General Form Elements -->
+
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+  </section>
+
+</main><!-- End #main -->
+
+
+
+
+
+
+{% endblock %}

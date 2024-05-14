@@ -1,0 +1,175 @@
+{% extends 'header2.html'%}
+{% block content %}
+<style>
+    .page-title-section {
+        background-image: url('../../media/images/christmas-gift-boxes-light-table.jpg');
+        background-size: cover;
+    }
+
+    /* Media query for smaller screen sizes */
+    @media (max-width: 767px) {
+        .page-title-section {
+            background-image: url('../../media/images/christmas-gifts-wrapped-glittering-paper-beside-festive-poinsettias-set-holiday-s_GXkKiHp.jpg');
+            /* Replace 'your-phone-image.jpg' with the path to your phone image */
+        }
+    }
+</style>
+<div class="offcanvas-overlay"></div>
+
+<!-- Page Title/Header Start -->
+<div class="page-title-section section">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <div class="page-title">
+                    <h1 class="title">Checkout</h1>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="">Home</a></li>
+                        <li class="breadcrumb-item active">Checkout</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .cart-nw {
+        float: right;
+        width: 100%;
+        padding: 40px 30px;
+        text-align: center;
+        background-color: #f7f7f7;
+    }
+</style>
+<div class="section section-padding">
+    <div class="container">
+        <table class="cart-wishlist-table table">
+            <thead>
+                <tr>
+                    <th class="name">Product</th>
+                    <th class="price">Price</th>
+                    <th class="quantity">Quantity</th>
+                    <th class="quantity">Sub Total</th>
+                    <th class="remove">Delete&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for variable in main %}
+                {% if variable.email == request.session.email %}
+                <tr>
+                    <td class="name">{{ variable.product_name }}</td>
+                    <td class="price"><span>{{ variable.product_price }}</span></td>
+                    <td class="quantity"><span>{{ variable.quantity }}</span></td>
+                    <td class="subtotal"><span>{{ variable.subtotal }}</span></td>
+                    <td class="remove"><a href="/user/deleterow11/{{ variable.id }}/" class="btn">×</a></td>
+                </tr>
+
+                {% endif %}
+                {% endfor %}
+
+            </tbody>
+           
+        </table>
+        <h3><div id="total" style="text-align:end"></div></h3>
+    </div>
+
+</div>
+<div class="section section-padding">
+    <div class="container">
+        <div class="cart-nw row">
+            <div class='col-6'>
+
+
+
+                <!-- <div class="totalfull">
+                    {% for variable in main %}
+                    {% if variable.email == request.session.email %}
+                    <h3>Total: <span class="amount">{{ variable.subtotal }}</span></h3>
+                    {% endif %}
+                    {% endfor %}
+                </div> -->
+            </div>
+            <div class="col-12">
+                <h2 class="title">Do Payment</h2>
+                <table>
+                    <tbody>
+                        <img src="../../media/images/qr.jpg" width="30%">
+                    </tbody><br><br>
+                </table>
+            </div>
+
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="container">
+                    <div class="row learts-mb-n30">
+                        <div class="col-md-8 col-12 mx-auto"> <!-- Added mx-auto class for centering -->
+                            <div class="row">
+                                <div class="col-md-6 col-12 learts-mb-30">
+                                    <input type="text" class="form-control" placeholder="Your Name *" name="name">
+                                </div>
+                                <div class="col-md-6 col-12 learts-mb-30">
+                                    <input type="email" class="form-control" placeholder="Email *" name="email">
+                                </div>
+                                <div class="col-md-6 col-12 learts-mb-30">
+                                    <input type="text" class="form-control" name="number" placeholder="Contact Number"
+                                        maxlength="10">
+                                </div>
+                                <div class="col-md-6 col-12 learts-mb-30">
+                                    <input type="text" class="form-control" name="upi_id" placeholder="UPI ID">
+                                </div>
+                                <div class="col-md-6 col-12 learts-mb-30">
+                                    <input type="text" class="form-control" placeholder="Delivery Address *"
+                                        name="address">
+                                </div>
+                                <div class="col-12 learts-mb-30">
+                                    <label for="screenshot">Upload Screenshot:</label>
+                                    <input type="file" class="form-control-file" name="img" id="screenshot">
+                                </div>
+                                <input type="hidden" name="total" id="total-input">
+
+                                <div class="col-12 text-center learts-mb-30"><button
+                                        class="btn btn-dark btn-outline-hover-dark">Submit</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateTotal();
+            updateTotalInput();
+        });
+
+        function calculateTotal() {
+            var total = 0;
+            var subtotalElements = document.querySelectorAll('.cart-wishlist-table .subtotal span');
+            subtotalElements.forEach(function(element) {
+                var subtotal = parseFloat(element.textContent);
+                total += subtotal;
+            });
+            document.getElementById('total').textContent = 'Total: ' + total.toFixed(2);
+        }
+
+        function updateTotalInput() {
+            var total = 0;
+            var subtotalElements = document.querySelectorAll('.cart-wishlist-table .subtotal span');
+            subtotalElements.forEach(function(element) {
+                var subtotal = parseFloat(element.textContent);
+                total += subtotal;
+            });
+            document.getElementById('total-input').value = total.toFixed(2);
+        }
+    </script>
+
+
+
+</div>
+{% endblock %}

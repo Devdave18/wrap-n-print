@@ -1,0 +1,80 @@
+
+{% extends 'header1.html'%}
+{% block content %}
+
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Checkout</h1>
+
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-10">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Checkout</h5>
+
+              <!-- General Form Elements -->
+    
+
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Table with hoverable rows</h5>
+              <div class="table-responsive">
+
+              <!-- Table with hoverable rows -->
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">UpiId</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for variable in checkout %}
+                  <tr >
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{variable.name}}</td>
+                  <td>{{variable.email}}</td>
+                  <td>{{variable.number}}</td>
+                  <td>{{variable.upi}}</td>
+                  <td>{{variable.address}}</td>
+                  <td><img src="../../media/{{variable.img}}" width="50%"></td>
+                  <td>{{variable.total}}</td>
+                  <!-- <td>2016-05-25</td> -->
+                  <td><a href="/panel/deleterow12/{{variable.id}}/" class="btn btn-danger m-2">Delete</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <!-- End Table with hoverable rows -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+ 
+
+  {% endblock %}
+
+
+

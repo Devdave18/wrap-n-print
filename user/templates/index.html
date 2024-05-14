@@ -1,0 +1,589 @@
+{% extends 'header.html'%}
+{% block content %}
+<style>
+    .titlecenter {
+        padding-top: 150px;
+        text-align: center;
+    }
+
+    .bloghide {
+        display: block;
+    }
+
+    .dealimg {
+        max-width: 70%;
+    }
+
+    .desktop {
+        display: block;
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    @media screen and (max-width:750px) {
+
+        .bloghide {
+            display: none;
+        }
+
+        .blog .content .title {
+            font-size: 12px;
+        }
+
+        .icon-box5 .icon {
+            display: none;
+        }
+
+        .dealimg {
+            max-width: 100%;
+        }
+
+        .desktop {
+            display: none;
+        }
+
+        .mobile {
+            display: block;
+        }
+    }
+</style>
+<!-- Slider main container Start -->
+<div class="section section-fluid">
+    <div class="home8-slider swiper-container">
+        <div class="swiper-wrapper">
+            {% for variable in slide %}
+            <div class="home8-slide-item swiper-slide" data-swiper-autoplay="5000">
+                <div class="home8-slide-image">
+                    <img src="../media/{{variable.img}}" width="100%" alt="Slide Image" class="desktop">
+                    <img src="../media/{{variable.phoneimg}}" width="100%" alt="Slide Image" class="mobile">
+                </div>
+                <div class="home8-slide-content">
+                    <span class="sub-title">{{variable.title}}</span>
+                    <h2 class="sub-title" style="color: darkseagreen;">{{ variable.heading|safe }}</h2>
+                    <div class="link">
+                        <a href="../printing/">Shop Now</a>
+                    </div>
+                </div>
+                <div class="home8-slide-pages">
+                    <span class="current">{{ forloop.counter }}</span>
+                    <span class="border"></span>
+                    <span class="total">3</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="home8-slider-pagination swiper-pagination"></div>
+    </div>
+</div>
+<!-- Slider main container End -->
+
+
+
+<!-- Category Banner Section Start -->
+<div class="section section-fluid learts-pt-50 bg-white">
+    <div class="container">
+        <div class="row learts-mb-n30">
+            <!-- <div class="section-title text-center">
+                <h3 class="sub-title">About Us</h3>
+            </div> -->
+            <div class="col-xxl-6 col-xl-6 col-12 learts-mb-30">
+                <div class="learts-blockquote">
+                    <div class="inner">
+                        <h2 class="title">{{about.heading}}
+                        </h2>
+                        <div class="desc">
+                            <p>{{about.content}}</p>
+                        </div>
+                        <a href="../gifting" class="link">Explore Us</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-xl-6 col-md-6 col-12 learts-mb-30">
+                <div class="sale-banner3-1">
+                    <div class="image"><img src="../media/{{about.img1}}" alt=""></div>
+                </div>
+            </div>
+
+            {% for var in category1|slice:":1" %}
+
+            <div class="col-xxl-3 col-xl-4 col-md-6 col-12 learts-mb-30">
+                <div class="category-banner3">
+                    <a href="../gifting" class="inner">
+                        <div class="image"><img src="../media/{{var.img}}" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div class="content">
+                    <h3 class="title titlecenter">{{var.title}}</h3>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% for var in category1|slice:"1:2" %}
+
+            <div class="col-xxl-3 col-xl-4 col-md-6 col-12 order-xxl-6 learts-mb-30">
+                <div class="category-banner3">
+                    <a href="../gifting" class="inner">
+                        <div class="image"><img src="../media/{{var.img}}" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div class="content">
+                    <h3 class="title titlecenter">{{var.title}}</h3>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% for var in category1|slice:"2:3" %}
+
+            <div class="col-xxl-3 col-xl-4 col-md-6 col-12 order-xxl-6 learts-mb-30">
+                <div class="category-banner3">
+                    <a href="../gifting" class="inner">
+                        <div class="image"><img src="../media/{{var.img}}" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div class="content">
+                    <h3 class="title titlecenter">{{var.title}}</h3>
+                </div>
+            </div>
+            {% endfor %}
+
+
+
+        </div>
+    </div>
+</div>
+<!-- Category Banner Section End -->
+
+
+<!-- Product Section Start -->
+<div class="section section-fluid section-padding bg-white">
+
+    <!-- Section Title Start -->
+    <div class="section-title text-center">
+        <h3 class="sub-title">Our Best Products</h3>
+    </div>
+    <!-- Section Title End -->
+    <div class="container">
+
+        <!-- Product Tab Start -->
+        <div class="row">
+            <div class="col-12">
+                <ul class="product-tab-list nav">
+                    <li><a class="active" data-bs-toggle="tab" href="#tab-new-sale">New arrivals</a></li>
+                    <li><a data-bs-toggle="tab" href="#tab-sale-items">Sale items</a></li>
+                    <li><a data-bs-toggle="tab" href="#tab-best-sellers">Best sellers</a></li>
+                </ul>
+                <div class="prodyct-tab-content1 tab-content">
+
+                    <div class="tab-pane fade show active" id="tab-new-sale">
+                        <!-- Products Start -->
+                        <div class="products row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+                            {% for variable in combined %}
+                            {% if variable.category == "New Arrivals" %}
+
+                            <div class="col">
+                                <div class="product">
+                                    <div class="product-thumb">
+                                        <a href="../productdetails1/{{variable.id}}" class="image">
+                                            <span class="product-badges">
+                                                <span class="onsale">{{variable.discount}}%</span>
+                                            </span>
+                                            <img src="../media/{{variable.img}}" alt="Product Image">
+                                            <img class="image-hover " src="../media/{{variable.img3}}"
+                                                alt="Product Image">
+                                        </a>
+                                    </div>
+
+                                    <div class="product-info">
+                                        <h6 class="title"><a
+                                                href="../productdetails1/{{variable.id}}">{{variable.name}}</a></h6>
+                                        <span class="price">
+                                            <span class="old"> ₹ {{variable.price}}</span>
+                                            <span class="new"> ₹ {{variable.sale}}</span>
+                                        </span>
+                                        {% with email=request.session.email %}
+                                      
+                                        <!-- <div class="product-buttons">
+                                            <a href="../cart1/{{variable.id}}/{{email}}"
+                                                class="product-button hintT-top" data-hint="Add to Cart"><i
+                                                    class="fas fa-shopping-cart"></i></a>
+                                        </div>
+                                        <div class="product-buttons">
+                                            <a href="../cart1/{{variable.id}}/{{email}}"
+                                                class="product-button hintT-top" data-hint="Wishlist"><i
+                                                    class="far fa-heart"></i></a>
+                                        </div> -->
+                                        <div class="product-buttons">
+                                            <a href="../cart1/{{variable.id}}/{{email}}"
+                                                class="product-button hintT-top" data-hint="Add to Cart"><i
+                                                    class="fas fa-shopping-cart"></i></a>
+                                            <a href="../wishlist/{{variable.id}}/{{email}}"
+                                                class="product-button hintT-top" data-hint="Wishlist"><i
+                                                    class="far fa-heart"></i></a>
+                                        </div>
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            {% endfor %}
+
+
+
+                        </div>
+                        <!-- Products End -->
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-sale-items">
+                        <!-- Products Start -->
+                        <div class="products row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+                            {% for variable in combined %}
+                            {% if variable.category == "Sale Items" %}
+                            <div class="col">
+                                <div class="product">
+                                    <div class="product-thumb">
+                                        <a href="../productdetails1/{{variable.id}}" class="image">
+                                            <span class="product-badges">
+                                                <span class="onsale">{{variable.discount}}%</span>
+                                            </span>
+                                            <img src="../media/{{variable.img}}" alt="Product Image">
+                                            <img class="image-hover " src="../media/{{variable.img3}}"
+                                                alt="Product Image">
+                                        </a>
+                                    </div>
+
+                                    <div class="product-info">
+                                        <h6 class="title"><a
+                                                href="../productdetails1/{{variable.id}}">{{variable.name}}</a></h6>
+                                        <span class="price">
+                                            <span class="old">₹ {{variable.price}}</span>
+                                            <span class="new">₹ {{variable.sale}}</span>
+                                        </span>
+                                        {% with email=request.session.email %}
+                                        {% if email %}
+                                        <div class="product-buttons">
+                                            <a href="../cart1/{{variable.id}}/{{email}}"
+                                                class="product-button hintT-top" data-hint="Add to Cart"><i
+                                                    class="fas fa-shopping-cart"></i></a>
+                                            <a href="../wishlist1/{{variable.id}}/{{email}}"
+                                                class="product-button hintT-top" data-hint="Wishlist"><i
+                                                    class="far fa-heart"></i></a>
+                                        </div>
+                                        {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            {% endfor %}
+
+                        </div>
+                        <!-- Products End -->
+                    </div>
+                    <div class="tab-pane fade" id="tab-best-sellers">
+                        <!-- Products Start -->
+                        <div class="products row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+                            {% for variable in combined %}
+                            {% if variable.category == "Best Sellers" %}
+                            <div class="col">
+                                <div class="product">
+                                    <div class="product-thumb">
+                                        <a href="../productdetails1/{{variable.id}}" class="image">
+                                            <span class="product-badges">
+                                                <span class="onsale">{{variable.discount}}%</span>
+                                            </span>
+                                            <img src="../media/{{variable.img}}" alt="Product Image">
+                                            <img class="image-hover " src="../media/{{variable.img3}}"
+                                                alt="Product Image">
+                                        </a>
+                                    </div>
+
+                                    <div class="product-info">
+                                        <h6 class="title"><a
+                                                href="../productdetails1/{{variable.id}}">{{variable.name}}</a></h6>
+                                        <span class="price">
+                                            <span class="old">₹ {{variable.price}}</span>
+                                            <span class="new">₹ {{variable.sale}}</span>
+                                        </span>
+                                        {% with email=request.session.email %}
+                                        {% if email %}
+                                        <div class="product-buttons">
+                                            <a href="../cart1/{{variable.id}}/{{email}}"
+                                                class="product-button hintT-top" data-hint="Add to Cart"><i
+                                                    class="fas fa-shopping-cart"></i></a>
+                                            <a href="../wishlist1/{{variable.id}}/{{email}}"
+                                                class="product-button hintT-top" data-hint="Wishlist"><i
+                                                    class="far fa-heart"></i></a>
+                                        </div>
+                                        {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            {% endfor %}
+
+                        </div>
+                        <!-- Products End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product Tab End -->
+
+    </div>
+</div>
+<!-- Product Section End -->
+
+<!-- Feature Section Start -->
+<div class="section section-padding">
+    <div class="container">
+
+        <div class="row learts-mb-n30">
+
+            <div class="col-xl-3 col-lg-4 col-12 me-auto learts-mb-30">
+                <h1 class="fw-400">The difference when you shop Learts!</h1>
+            </div>
+            <div class="col-lg-8 col-12 learts-mb-30">
+                <div class="row learts-mb-n30">
+
+                    <div class="col-md-6 col-6 learts-mb-30">
+                        <p class="text-heading fw-600 learts-mb-10">Free Shipping</p>
+                        <p>Once receiving your order, we will turn your products around in 3-5 business days.</p>
+                    </div>
+
+                    <div class="col-md-6 col-6 learts-mb-30">
+                        <p class="text-heading fw-600 learts-mb-10">Free Returns</p>
+                        <p>We accept returns for freshly purchased products within 7 days from the payment.</p>
+                    </div>
+
+                    <div class="col-md-6 col-6 learts-mb-30">
+                        <p class="text-heading fw-600 learts-mb-10">Superb Quality</p>
+                        <p>We make commitments that the quality of our products will and always will be superb.</p>
+                    </div>
+
+                    <div class="col-md-6 col-6 learts-mb-30">
+                        <p class="text-heading fw-600 learts-mb-10">Free Wrapping</p>
+                        <p>Upon request, items bought as gifts from our store can receive free wrapping service.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- Feature Section End -->
+
+
+<!-- Deal of the Day Section Start -->
+<div class="section section-fluid section-padding">
+    <div class="container">
+        <div class="row align-items-center learts-mb-n30">
+            {%for var in deal1%}
+            <div class="col-lg-6 col-12 learts-mb-30">
+                <div class="product-deal-image text-center">
+                    <img src="../media/{{var.img}}" alt="" class="dealimg">
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-12 learts-mb-30">
+                <div class="product-deal-content">
+                    <h2 class="title">Deal of the day</h2>
+                    <div class="desc">
+                        <p>Years of experience brought about by our skilled craftsmen could ensure that every piece
+                            produced is a work of art. Our focus is always the best quality possible.</p>
+                    </div>
+                    <div class="countdown1" data-countdown="{{var.date}}"> {{var.date}}</div>
+                    <a href="{{var.link}}" class="btn btn-dark btn-hover-primary">Shop Now</a>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Deal of the Day Section End -->
+
+<!-- Shop By Category Section Start -->
+<div class="section section-fluid section-padding bg-white">
+    <div class="container">
+
+        <!-- Section Title Start -->
+        <div class="section-title text-center">
+            <h3 class="sub-title">Shop by categories</h3>
+            <h2 class="title title-icon-both">Making & crafting</h2>
+        </div>
+        <!-- Section Title End -->
+
+        <div class="row row-cols-xl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 learts-mb-n40">
+            {%for var in category1%}
+            <div class="col learts-mb-40">
+                <div class="category-banner5">
+                    <a href="../gifting/" class="inner">
+                        <div class="image"><img src="../media/{{var.img}}" alt="">
+                        </div>
+                        <div class="content">
+                            <h3 class="title">{{var.title}}</h3>
+                            <!-- <span class="number">16 Items</span> -->
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+<!-- Shop By Category Section End -->
+
+
+<!-- Sale Banner Start -->
+<div class="section section-padding">
+    <div class="container">
+        <div class="row learts-mb-n40">
+
+            <div class="col-lg-4 learts-mb-40 ">
+                <!-- Section Title Start -->
+                <div class="section-title2 mb-5">
+                    <h2 class="title title-icon-right">Blog update</h2>
+                    <p>Subscribe for latest news and blog updates from our editor.</p>
+                </div>
+                <!-- Section Title End -->
+                <ul class="widget-list bloghide">
+                    {%for var in blogs1%}
+                    <li><i class="fas fa-long-arrow-alt-right"></i><a
+                            href="../blog_details/{{var.id}}">{{var.title}}</a></li>
+                    {%endfor%}
+                </ul>
+            </div>
+
+            <div class="col-lg-8 learts-mb-40">
+                <div class="row learts-mb-n40">
+                    {% for var in blogs1%}
+                    <div class="col-md-6 col-6 learts-mb-40">
+                        <div class="blog">
+                            <div class="image">
+                                <a href="../blog_details/{{var.id}}"><img src="../media/{{ var.img1 }}"
+                                        alt="Blog Image"></a>
+                            </div>
+                            <div class="content">
+                                <ul class="meta">
+                                    <li><i class="far fa-calendar"></i><a
+                                            href="../blog_details/{{var.id}}">{{var.date}}</a></li>
+                                </ul>
+                                <h5 class="title"><a href="../blog_details/{{var.id}}">{{var.title}}</a></h5>
+                                <div class="desc">
+                                    <p>{{ var.discription }}</p>
+                                </div>
+                                <a href="../blog_details/{{var.id}}" class="link">Read More</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Sale Banner End -->
+
+
+
+<!-- Testimonial Section Start -->
+<div class="section section-padding">
+    <div class="container">
+
+        <div class="section-title2 row justify-content-between align-items-center">
+            <div class="col-md-auto col-12">
+                <!-- Section Title Start -->
+                <h2 class="title title-icon-right">We love our clients</h2>
+                <!-- Section Title End -->
+            </div>
+            <!-- <div class="col-md-auto col-12 mt-4 mt-md-0">
+                <a href="#" class="btn btn-light btn-hover-black">view all</a>
+            </div> -->
+        </div>
+
+        <div class="testimonial-carousel">
+            {% for var in reviews%}
+            <div class="col">
+                <div class="testimonial">
+                    <p>{{ var.reviews }}</p>
+                    <div class="author">
+                        <img src="../media/{{ var.img }}" alt="">
+                        <div class="content">
+                            <h6 class="name">{{ var.name }}</h6>
+                            <span class="title">{{ var.designation }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+<!-- Testimonial Section End -->
+
+
+<!-- Feature Section Start -->
+<div class="section border-top learts-pt-30 learts-pb-30">
+    <div class="container">
+        <div class="row learts-mb-n30">
+
+            <div class="col-lg-3 col-sm-6 col-6 learts-mb-30">
+                <div class="icon-box5">
+                    <div class="icon" data-bg-color="#f4ede7"><i class="fas fa-truck"></i></div>
+                    <div class="content">
+                        <h4 class="title">Free shipping</h4>
+                        <p>All orders over 590 Rs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-6 learts-mb-30">
+                <div class="icon-box5">
+                    <div class="icon" data-bg-color="#f4ede7"><i class="fas fa-redo-alt"></i></div>
+                    <div class="content">
+                        <h4 class="title">Free returns</h4>
+                        <p>Free 7-day returns</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-6 learts-mb-30">
+                <div class="icon-box5">
+                    <div class="icon" data-bg-color="#f4ede7"><i class="fas fa-headset"></i></div>
+                    <div class="content">
+                        <h4 class="title">24/7 Support</h4>
+                        <p>Dedicated support</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-6 learts-mb-30">
+                <div class="icon-box5">
+                    <div class="icon" data-bg-color="#f4ede7"><i class="fas fa-gift"></i></div>
+                    <div class="content">
+                        <h4 class="title">Gift cards</h4>
+                        <p>Code promotion</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Feature Section End -->
+{% endblock %}

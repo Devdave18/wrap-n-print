@@ -1,0 +1,75 @@
+
+{% extends 'header1.html'%}
+{% block content %}
+
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Orders</h1>
+
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-10">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Orderitem</h5>
+
+              <!-- General Form Elements -->
+    
+
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Table with hoverable rows</h5>
+              <div class="table-responsive">
+
+              <!-- Table with hoverable rows -->
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Sub Total</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Delete</th>
+                </thead>
+                <tbody>
+                  {% for variable in OrderItem %}
+                  <tr >
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{variable.product_name}}</td>
+                  <td>{{variable.product_price}}</td>
+                  <td>{{variable.quantity}}</td>
+                  <td>{{variable.subtotal}}</td>
+                  <td>{{variable.email}}</td>
+                  <!-- <td>2016-05-25</td> -->
+                  <td><a href="/panel/deleterow13/{{variable.id}}/" class="btn btn-danger m-2">Delete</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <!-- End Table with hoverable rows -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+ 
+
+  {% endblock %}
+
+
+

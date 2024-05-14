@@ -1,0 +1,65 @@
+{% extends 'header.html'%}
+{% block content %}
+<style>
+    .page-title-section {
+    background-image: url('../../media/images/christmas-gift-boxes-light-table.jpg');
+    background-size: cover;
+}
+
+/* Media query for smaller screen sizes */
+@media (max-width: 767px) {
+    .page-title-section {
+        background-image: url('../../media/images/christmas-gifts-wrapped-glittering-paper-beside-festive-poinsettias-set-holiday-s_GXkKiHp.jpg'); /* Replace 'your-phone-image.jpg' with the path to your phone image */
+    }
+}
+</style>
+<div class="offcanvas-overlay"></div>
+    <div class="page-title-section section">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <div class="page-title">
+                        <h1 class="title">Blog</h1>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                            <li class="breadcrumb-item active">Blog</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="section section-padding">
+        <div class="container">
+            <div class="row learts-mb-n40">
+                {% for variable in blog %}
+                <div class="col-lg-4 col-md-6 col-12 learts-mb-40">
+                    <div class="blog">
+                        <div class="image">
+                            <a href="../blog_details/{{variable.id}}"><img src="../media/{{variable.img1}}" alt="Blog Image"></a>
+                        </div>
+                        <div class="content">
+                            <ul class="meta">
+                                <li><i class="far fa-calendar"></i><a href="../blog_details/{{variable.id}}">{{variable.date}}</a></li>
+                            </ul>
+                            <h5 class="title"><a href="../blog_details/{{variable.id}}">{{variable.title}}</a></h5>
+                            <div class="desc">
+                                <p>{{variable.discription}}</p>
+                            </div>
+                            <a href="../blog_details/{{variable.id}}" class="link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+
+            
+
+        </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,139 @@
+{% extends 'header.html'%}
+{% block content %}
+<style>
+    .page-title-section {
+        background-image: url('../../media/images/christmas-gift-boxes-light-table.jpg');
+        background-size: cover;
+    }
+
+    /* Media query for smaller screen sizes */
+    @media (max-width: 767px) {
+        .page-title-section {
+            background-image: url('../../media/images/christmas-gifts-wrapped-glittering-paper-beside-festive-poinsettias-set-holiday-s_GXkKiHp.jpg');
+            /* Replace 'your-phone-image.jpg' with the path to your phone image */
+        }
+    }
+</style>
+
+<div class="page-title-section section">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <div class="page-title">
+                    <h1 class="title">Contact us</h1>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                        <li class="breadcrumb-item active">Contact us</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="section section-padding row">
+    <div class="container col-lg-8 col-12 mx-auto">
+        <!-- Section Title Start -->
+        <div class="section-title2 text-center">
+            <h2 class="title">Keep in touch with us</h2>
+            <p>Been tearing your hair out to find the perfect gift for your loved ones? Try visiting our nationwide
+                local stores. You can also contact us to become partner or distributor. Call us, send us an email or
+                make an appointment now.</p>
+        </div>
+        <!-- Section Title End -->
+
+        <!-- Contact Information Start -->
+        <div class="container row learts-mb-n30">
+            <div class="col-lg-4 col-md-6 col-12 learts-mb-30">
+                <div class="contact-info">
+                    <h4 class="title">ADDRESS</h4>
+                    <span class="info"><i class="icon fas fa-map-marker-alt"></i>Kamdhenu complex, Navrangpura, Ahmedabad</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 learts-mb-30">
+                <div class="contact-info">
+                    <h4 class="title">CONTACT</h4>
+                    <span class="info"><i class="icon fas fa-phone-alt"></i> Mobile: (+91) 98986-60970 <br> </span>
+                    <span class="info"><i class="icon far fa-envelope"></i> Mail: <a
+                            href="#">info@techonithub.com</a></span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 learts-mb-30">
+                <div class="contact-info">
+                    <h4 class="title"> HOUR OF OPERATION</h4>
+                    <span class="info"><i class="icon far fa-clock"></i> Monday – Friday : 09:00 – 08:00 <br> 
+                        Saturday & Sunday : Off</span>
+                </div>
+            </div>
+        </div>
+        <!-- Contact Information End -->
+       
+    </div>
+    <div class="col-lg-4 col-12 mx-auto">
+        <iframe class="contact-map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2136.986005919501!2d-73.9685579655238!3d40.75862446708152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258e4a1c884e5%3A0x24fe1071086b36d5!2sThe%20Atrium!5e0!3m2!1sen!2sbd!4v1585132512970!5m2!1sen!2sbd"
+            style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    </div>
+</div>
+
+
+<div class="section section-padding pt-0">
+    <div class="container">
+        <!-- Section Title Start -->
+        <div class="section-title2 text-center">
+            <h2 class="title">Send a message</h2>
+        </div>
+        <!-- Section Title End -->
+        <style>
+            select {
+                font-size: 16px;
+                font-weight: 400;
+                display: block;
+                width: 100%;
+                padding: 10px 0;
+                color: grey;
+                border: 2px solid rgba(0, 0, 0, 0);
+                border-bottom-color: #ededed;
+                background-color: rgba(0, 0, 0, 0);
+            }
+        </style>
+        <div class="row">
+            <div class="col-lg-8 col-12 mx-auto">
+                <div class="contact-form">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="row learts-mb-n30">
+                            <div class="col-md-6 col-12 learts-mb-30"><input type="text" placeholder="Your Name *"
+                                    name="name"></div>
+                            <div class="col-md-6 col-12 learts-mb-30"><input type="email" placeholder="Email *"
+                                    name="email"></div>
+                            <div class="col-md-6 col-12 learts-mb-30"><input type="text" name="number"
+                                    placeholder="Contact Number" maxlength="10"></div>
+                            <div class="col-md-6 col-12 learts-mb-30">
+                                <select name="category">
+                                    <option value="" disabled selected>Choose your Category</option>
+                                    <option value="Gifting">Gifitng</option>
+                                    <option value="Printing">Printing</option>
+                                </select>
+                            </div>
+                            <div class="col-12 learts-mb-30"><textarea name="message" placeholder="Message"></textarea>
+                            </div>
+                            <div class="col-12 text-center learts-mb-30"><button
+                                    class="btn btn-dark btn-outline-hover-dark">Submit</button></div>
+
+                        </div>
+                    </form>
+
+                    <p class="form-messege"></p>
+                </div>
+            </div>
+           
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

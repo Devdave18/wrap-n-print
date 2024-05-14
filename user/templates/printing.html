@@ -1,0 +1,220 @@
+{% extends 'header.html'%}
+{% block content %}
+<style>
+    .page-title-section {
+    background-image: url('../../media/images/christmas-gift-boxes-light-table.jpg');
+    background-size: cover;
+}
+
+/* Media query for smaller screen sizes */
+@media (max-width: 767px) {
+    .page-title-section {
+        background-image: url('../../media/images/christmas-gifts-wrapped-glittering-paper-beside-festive-poinsettias-set-holiday-s_GXkKiHp.jpg'); /* Replace 'your-phone-image.jpg' with the path to your phone image */
+    }
+}
+</style>
+<div class="offcanvas-overlay"></div>
+
+
+<!-- Page Title/Header Start -->
+<div class="page-title-section section">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+
+                <div class="page-title">
+                    <h1 class="title">Printing</h1>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active">Printing</li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Title/Header End -->
+
+<!-- Shop Products Section Start -->
+<div class="section section-padding pt-0">
+
+    <!-- Shop Toolbar Start -->
+    <div class="shop-toolbar section-fluid border-bottom">
+        <div class="container">
+            <div class="row learts-mb-n20">
+
+                <!-- Isotop Filter Start -->
+                <div class="col-md col-12 align-self-center learts-mb-20">
+          
+                </div>
+                <!-- Isotop Filter End -->
+                <script>
+                    $(document).ready(function(){
+                        // Function to handle sorting based on dropdown selection
+                        $(".nice-select").change(function(){
+                            var selectedValue = $(this).val();
+                            console.log(selectedValue)
+                            window.location.href = '?sort=' + selectedValue;
+                        });
+                    });
+                </script>
+                <div class="col-md-auto col-12 learts-mb-20">
+                    <ul class="shop-toolbar-controls">
+
+                        <li>
+                            <div class="product-sorting">
+                                <select class="nice-select">
+                                    <option value="menu_order" {% if sort_direction == 'menu_order' %}selected="selected"{% endif %}>Default sorting</option>
+                                    <option value="price" {% if sort_direction == 'price' %}selected="selected"{% endif %}>Sort by price: low to high</option>
+                                    <option value="price-desc" {% if sort_direction == 'price-desc' %}selected="selected"{% endif %}>Sort by price: high to low</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="product-column-toggle d-none d-xl-flex">
+                                <button class="toggle hintT-top" data-hint="5 Column" data-column="5"><i
+                                        class="ti-layout-grid4-alt"></i></button>
+                                <button class="toggle active hintT-top" data-hint="4 Column" data-column="4"><i
+                                        class="ti-layout-grid3-alt"></i></button>
+                                <button class="toggle hintT-top" data-hint="3 Column" data-column="3"><i
+                                        class="ti-layout-grid2-alt"></i></button>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Shop Toolbar End -->
+
+    <!-- Product Filter Start -->
+
+    <!-- Product Filter End -->
+
+    <div class="section section-fluid learts-mt-70" >
+        <div class="container">
+            <div class="row learts-mb-n50">
+
+                <div class="col-lg-12 col-12 learts-mb-50 order-lg-2">
+                    <!-- Products Start -->
+                    <div id="shop-products"
+                        class="products isotope-grid row row-cols-xl-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+
+                        <div class="grid-sizer col-1"></div>
+                        {% for variable in printing %}
+                        {% if variable.type == "Printing" %}
+                        <div class="grid-item col">
+                            <div class="product">
+                                <div class="product-thumb">
+                                    <a href="../productdetails1/{{variable.id}}" class="image">
+                                        <img src="../media/{{variable.img}}" alt="Product Image">
+                                        <img class="image-hover "
+                                            src="../media/{{variable.img3}}"
+                                            alt="Product Image">
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <h6 class="title"><a href="../productdetails1/{{variable.id}}">{{variable.name}}</a>
+                                    </h6>
+                                    <span class="price">
+                                        <span class="old">₹ {{variable.price}}</span>
+                                        <span class="new">₹ {{variable.sale}}</span>
+                                    </span>
+                                    {% with email=request.session.email %}
+                                    <div class="product-buttons">
+                                        <a href="../cart1/{{variable.id}}/{{email}}"
+                                            class="product-button hintT-top" data-hint="Add to Cart"><i
+                                                class="fas fa-shopping-cart"></i></a>
+                                        <a href="../wishlist/{{variable.id}}/{{email}}"
+                                            class="product-button hintT-top" data-hint="Wishlist"><i
+                                                class="far fa-heart"></i></a>
+                                    </div>
+                                    {% endwith %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+
+                <!-- <div class="col-lg-3 col-12 learts-mb-10 order-lg-1">
+
+
+                    <div class="single-widget learts-mb-40">
+                        <h3 class="widget-title product-filter-widget-title">Product categories</h3>
+                        <ul class="widget-list">
+                            {% for category_item in category%}
+                            <li>
+                                <a href="#">{{ category_item.title }}</a> 
+                                <span class="count">
+                                    {% with category_count=0 %}
+                                        {% for product_item in printing %}
+                                            {% if product_item.subcategory == category_item.title %}
+                                                {% with category_count=category_count|add:1 %}
+                                                {% endwith %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {{ category_count }}
+                                    {% endwith %}
+                                </span>
+                            </li>
+                        {% endfor %}
+                
+                        </ul>
+                    </div>
+                
+                    <div class="single-widget learts-mb-40">
+                        <h3 class="widget-title product-filter-widget-title">Filters by price</h3>
+                        <div class="widget-price-range">
+                            <input class="range-slider" type="text" data-min="0" data-max="10000" data-from="0" data-to="10000" />
+                        </div>
+                    </div>
+                
+                    <button id="applyFilterAndSort">Apply Filter & Sort</button>
+                
+                   
+                
+                    <script>
+                        $(document).ready(function(){
+                            // Initialize range slider
+                            $(".range-slider").ionRangeSlider({
+                                type: "double", // Set the slider type to double for selecting a range
+                                min: 0,         // Set the minimum value of the slider
+                                max: 10000,     // Set the maximum value of the slider to 10,000
+                                from: 0,        // Set the initial start value of the slider
+                                to: 10000      // Set the initial end value of the slider
+                            });
+                
+                            // Event listener for the Apply Filter & Sort button
+                            $("#applyFilterAndSort").on("click", function(){
+                                // Get the selected price range from the slider
+                                var range = $(".range-slider").data("ionRangeSlider");
+                                var minPrice = range.result.from;
+                                var maxPrice = range.result.to;
+                
+                                // Get the selected sorting option
+                                var selectedSortOption = $(".nice-select").val();
+                
+                                // Redirect to the URL with both filtering and sorting parameters
+                                window.location.href = '?sort=' + selectedSortOption + '&min_price=' + minPrice + '&max_price=' + maxPrice;
+                            });
+                        });
+                    </script>
+
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Shop Products Section End -->
+
+{% endblock %}

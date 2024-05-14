@@ -1,0 +1,145 @@
+{% extends 'header1.html'%}
+{% block content %}
+
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Blogs</h1>
+
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Blog</h5>
+
+              <!-- General Form Elements -->
+              <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row mb-3">
+                  <label for="inputText"  class="col-sm-2 col-form-label">Title</label>
+                  <div class="col-sm-10">
+                    <input type="name" name="title" class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Image1</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" name="img1" type="file" id="formFile">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Image2</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" name="img2" type="file" id="formFile">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Image3</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" name="img3" type="file" id="formFile">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Description1</label>
+                  <div class="col-sm-10">
+                    <input type="name" name="description1" class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Description2</label>
+                  <div class="col-sm-10">
+                    <input type="name" name="description2" class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Description3</label>
+                  <div class="col-sm-10">
+                    <input type="name" name="description3" class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Date</label>
+                  <div class="col-sm-10">
+                    <input type="date" name="date" class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Author</label>
+                  <div class="col-sm-10">
+                    <input type="name" name="author" class="form-control">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-sm-10">
+                    <button type="submit" name="submit" class="btn btn-primary">Submit Form</button>
+                  </div>
+                </div>
+              </form><!-- End General Form Elements -->
+
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Table with hoverable rows</h5>
+              <div class="table-responsive">
+              <!-- Table with hoverable rows -->
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Image1</th>
+                    <th scope="col">Image2</th>
+                    <th scope="col">Image3</th>
+                    <th scope="col">Description1</th>
+                    <th scope="col">Description2</th>
+                    <th scope="col">Description3</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Update</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for variable in blog %}
+                  <tr >
+                  <th scope="row">1</th>
+                  <td>{{variable.title}}</td>
+                  <td><img src="../../media/{{variable.img1}}" width="100%"></td>
+                  <td><img src="../../media/{{variable.img2}}" width="100%"></td>
+                  <td><img src="../../media/{{variable.img3}}" width="100%"></td>
+                  <td>{{variable.description1}}</td>
+                  <td>{{variable.description2}}</td>
+                  <td>{{variable.description3}}</td>
+                  <td>{{variable.date}}</td>
+                  <td>{{variable.author}}</td>
+                  <td><a href="/panel/deleterow2/{{variable.id}}/" class="btn btn-danger m-2">Delete</a></td>
+                  <td><a href="/panel/blogup/{{variable.id}}/" class="btn btn-danger m-2">Update</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <!-- End Table with hoverable rows -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+ 
+
+  {% endblock %}
+
+
+
